@@ -338,7 +338,7 @@ To add a single entity in accessory mode:
 
 ## Configure Filter
 
-By default, no entity will be excluded. To limit which entities are being exposed to `HomeKit`, you can use the `filter` parameter. Keep in mind only [supported components](#supported-components) can be added.
+By default, all entities except categorized entities (config, diagnostic, and system entities) are included. To limit which entities are being exposed to `HomeKit`, you can use the `filter` parameter. Keep in mind only [supported components](#supported-components) can be added.
 
 ```yaml
 # Example filter to include specified domains and exclude specified entities
@@ -370,6 +370,8 @@ Filters are applied as follows:
    - Neither include or exclude specifies domains or glob patterns
       - If entity is included, pass (as #2 above)
       - If entity include and exclude, the entity exclude is ignored
+
+Categorized entities are not included (config, diagnostic, and system entities) unless they are explicitly matched by `include_entity_globs` or `include_entities` or selected in the UI in include mode.
 
 ## Docker Network Isolation
 
@@ -429,7 +431,7 @@ The following integrations are currently supported:
 
 # Device Triggers
 
-Devices that support triggers can be added to the bridge by accessing options for the bridge in **{% my integrations title="Configuration >> Integrations" %}**.
+Devices that support triggers can be added to the bridge by accessing options for the bridge in **{% my integrations title="Configuration >> Integrations" %}**. To use this feature, Advanced Mode must be enabled in your user profile.
 
 Bridged device triggers are represented as a single press button on stateless programmable switches. This allows a HomeKit automation to run when a device trigger fires. Because the Apple Home app currently only shows the number of the button and not the name, users may find it easier to identify the name of the button in the `Eve for HomeKit` app.
 
@@ -542,6 +544,10 @@ You can also try to use `avahi-daemon` in reflector mode together with the optio
 #### `Home Assistant Bridge` doesn't appear in the Home App (for pairing) - VirtualBox
 
 Configure the network mode as `networkbridge`. Otherwise the Home Assistant Bridge won't be exposed to the network.
+
+#### Accessory does not appear in the Home App (for pairing) - Libvirt QEMU/KVM virtual machine with macvtap adapter
+
+Please see the [Zero-configuration networking](/integrations/zeroconf/#troubleshooting) integration for more details.
 
 #### Pairing hangs - zeroconf error
 

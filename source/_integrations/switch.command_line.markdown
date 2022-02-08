@@ -56,7 +56,7 @@ switches:
           description: The name used to display the switch in the frontend.
           required: false
           type: string
-        icon:
+        icon_template:
           description: Defines a template for the icon of the entity.
           required: false
           type: template
@@ -65,6 +65,10 @@ switches:
           required: false
           type: integer
           default: 15
+        unique_id:
+          description: An ID that uniquely identifies this switch. Set this to a unique value to allow customization through the UI.
+          required: false
+          type: string
 {% endconfiguration %}
 
 A note on `friendly_name`:
